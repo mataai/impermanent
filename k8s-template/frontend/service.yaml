@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: impermanent-service
+spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    app: impermanent
+  ports:
+  - port: 3000
+    targetPort: 80

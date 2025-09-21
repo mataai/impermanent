@@ -1,0 +1,100 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: <team-name>
+namePrefix: <team-name>
+
+resources:
+  - ./frontend
+  - ./backend
+
+configMapGenerator:
+  - name: app-config
+    literals:
+      - WEB_IMAGE=myapp:latest
+      - API_IMAGE=mybackend:latest
+      - WEB_PORT=3000
+      - API_PORT=8080
+      - TEAM=test
+
+vars:
+  - name: WEB_IMAGE
+    objref:
+      kind: ConfigMap
+      name: app-config
+      apiVersion: v1
+      fieldpath: data.WEB_IMAGE
+  - name: API_IMAGE
+    objref:
+      kind: ConfigMap
+      name: app-config
+      apiVersion: v1
+      fieldpath: data.API_IMAGE
+  - name: WEB_PORT
+    objref:
+      kind: ConfigMap
+      name: app-config
+      apiVersion: v1
+      fieldpath: data.WEB_PORT
+  - name: API_PORT
+    objref:
+      kind: ConfigMap
+      name: app-config
+      apiVersion: v1
+      fieldpath: data.API_PORT
+  - name: TEAM
+    objref:
+      kind: ConfigMap
+      name: app-config
+      apiVersion: v1
+      fieldpath: data.TEAM
+
+patches:
+  - target:
+      kind: Deployment
+      name: impermanent
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: $(WEB_IMAGE)
+  - target:
+      kind: Service
+      name: impermanent-service
+    patch: |-
+      - op: replace
+        path: /spec/ports/0/port
+        value: $(WEB_PORT)
+  - target:
+      kind: Ingress
+      name: ingress
+    patch: |-
+      - op: replace
+        path: /spec/rules/0/host
+        value: $(TEAM).impermanent.sandbox.cedille.club
+      - op: replace
+        path: /spec/tls/0/hosts/0
+        value: $(TEAM).impermanent.sandbox.cedille.club
+  - target:
+      kind: Deployment
+      name: impermanent-backend
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: $(API_IMAGE)
+  - target:
+      kind: Service
+      name: impermanent-backend-service
+    patch: |-
+      - op: replace
+        path: /spec/ports/0/port
+        value: $(API_PORT)
+  - target:
+      kind: Ingress
+      name: backend-ingress
+    patch: |-
+      - op: replace
+        path: /spec/rules/0/host
+        value: $(TEAM)-backend.impermanent.sandbox.cedille.club
+      - op: replace
+        path: /spec/tls/0/hosts/0
+        value: $(TEAM)-backend.impermanent.sandbox.cedille.club
