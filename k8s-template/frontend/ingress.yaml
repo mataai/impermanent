@@ -14,7 +14,7 @@ spec:
     - matai-impermanent.sandbox.cedille.club # replace me!
     secretName: secret
   rules:
-  - host: impermanent.sandbox.cedille.club
+  - host: matai-impermanent.sandbox.cedille.club
     http:
       paths:
       - path: /
