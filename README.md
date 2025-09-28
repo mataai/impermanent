@@ -24,7 +24,7 @@ Les informations qui suivent sont des guides. Si vous désirer faire autrement a
 
 Les vues à faire sont montré dans un pdf : [View the PDF](https://github.com/ClubCedille/impermanent/blob/main/impermanent_views.pdf)
 
-Un petit MDD diagramme (en UML) qui illustre les composantes. [View the UML](https://github.com/ClubCedille/impermanent/blob/main/impermanent_uml_mdd.pdf)
+Un petit MDD diagramme (en UML) qui illustre les composantes. [View the UML](https://github.com/ClubCedille/impermanent/blob/main/impermanents_uml_mdd.pdf)
  
 ## Documentaiton: Backend
 
