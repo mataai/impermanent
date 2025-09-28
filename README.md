@@ -5,32 +5,86 @@ Projet web collaboratif explorant les thèmes de l’impermanence dans un contex
 Développer une application prototype pour un doctorant du nouveau département de design de l’ÉTS, dans une réflexion sur notre relation à l’art et à la musique par la technologie.
 
 ## Concept
-Un simple CMS qui génère un code QR donnant droit à **une seule écoute** d’une chanson, accompagnée de ses paroles et d’un message de l’artiste.
+Un CMS minimal qui génère un QR code donnant droit à **une seule écoute** d’une chanson,
+avec ses paroles et un message de l’artiste.
 
-Le QR code généré permet une seule écoute par dispositif. Une autre personne pourrait le scanner pour l’écouter (ça fait partie de l’intention, trouver des moments d’écoute individuel ou collectif signifiants).
+- Chaque QR code autorise une écoute par appareil (stockée en local dans le navigateur).
+- Le même code peut être scanné par plusieurs personnes, mais chaque écoute reste unique.
 
 ## Contexte théorique
-Si vous souhaitez en savoir plus sur les théories qui sous-tendent ce projet (explorées dans le cadre de ma thèse)...
-Elles s’appuient sur les théories critiques des industries culturelles et sur la théorie de la résonance du sociologue allemand Hartmut Rosa :  
+Ce projet s’appuie sur les théories critiques des industries culturelles et sur la théorie de la résonance du sociologue allemand Hartmut Rosa :  
 <https://en.wikipedia.org/wiki/Resonance_(sociology)>
 
 ## Tâches de l’atelier
 - Coder le **front-end** et le **back-end**  
-- Déployer le tout sur notre infrastructure dans le cluster sandbox: impermanents-<equipe>.prodv2.cedille.club
+- Déployer le tout sur notre infrastructure dans le cluster sandbox: <equipe>-impermanent.sandbox.cedille.club
 
-## Documentation: Frontend
+## Documentation: Frontend & Backend
 
-Les informations qui suivent sont des guides. Si vous désirer faire autrement allez y!
+Les éléments qui suivent sont des suggestions.
+Libre à vous de procéder autrement si vous préférez !
 
-Les vues à faire sont montré dans un pdf : [View the PDF](https://github.com/ClubCedille/impermanent/blob/main/impermanent_views.pdf)
+### **Architecture**
 
-Un petit MDD diagramme (en UML) qui illustre les composantes. [View the UML](https://github.com/ClubCedille/impermanent/blob/main/impermanents_uml_mdd.png)
+- Backend
+
+  - API REST (ex. /song pour créer une chanson + QR code).
+
+  - Stockage audio sous forme de fichiers (ex. bucket S3 ou volume persistant) référencés en base de données.
+
+  - Endpoints :
+
+    - POST /song : création d’une chanson + QR
+
+    - GET /song/{qrCode} : récupération métadonnées + URL audio
+
+    - *POST /song/{qrCode}/listen : enregistre la première écoute (optionnel, si vous souhaitez tracer les lectures côté serveur).*
+
+- Frontend
+
+  - Page qui s’ouvre au scan du QR code, affiche l’artiste, le message et le bouton « Écouter ».
+  - Page d'accuiel qui permet d'ajouter une chanson et de géhérer un code qr.
+  - Vérifie dans localStorage/IndexedDB si l’utilisateur a déjà écouté la chanson sur ce navigateur.
+
+- Guides visuels
+
+  - Les vues à implémenter : [View the PDF](docs/impermanent_views.pdf)
  
-## Documentaiton: Backend
+  - Modèle de données UML:
+    
+    ![MDD UML](docs/impermanent_uml_mdd.png)
 
+  - Cas utilisation: Un artiste ajoute une chanson pour créer un QR Code
+    
+    ![View the UML](docs/impermanent_dss-post-song.png)
 
+  - Cas utilisation: Une personne souhaite écouter une chanson en scannant un code qr.
+    
+    ![View the UML](docs/impermanent_dss-get-song.png)
 
-## Documentation: Déploiement (Kubernetes)
+  > Stockez l’URL du backend dans les variables d’environnement pour faciliter le déploiement. (fichier .env)
+  
+  > Pour le développement, utilisez des conteneurs Docker (PostgreSQL, etc.) pour vos bases de données.
+
+## Documentation: DevOps
+
+Le dossier k8s-template fournit une base de manifestes Kubernetes (Deployment, Service, Ingress).
+Adaptez les champs nécessaires et posez vos questions si besoin.
+
+### **CI/CD**
+
+- **CI – Intégration Continue**  
+  Intégrer régulièrement du code dans la branche principale, exécuter des tests,
+  puis construire et publier l’image Docker sur `ghcr.io`.
+
+- **CD – Déploiement Continu**  
+  Déployer l’application à partir de l’image produite.  
+  Ici, on applique les manifests Kubernetes avec `kubectl`.
+
+> Pour l’atelier, nous n’utilisons **ni ArgoCD ni Flux** :
+> le déploiement se fait manuellement.
+
+### **Procedure pour avoir accès au kubectl**
 
 - Installer Krew dans votre terminal: suivre [les instructions d'installation de
 krew](https://krew.sigs.k8s.io/docs/user-guide/setup/install/)
