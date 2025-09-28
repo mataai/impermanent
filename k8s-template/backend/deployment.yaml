@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: impermanent-backend
-        image: <Image>
+        image: <Image> #replace me !
         resources:
           limits:
             memory: "128Mi"
@@ -27,5 +27,3 @@ spec:
       - name: impermanent-storage
         persistentVolumeClaim:
           claimName: impermanent
-        ports:
-        - containerPort: <Port>
