@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: white;
+}
+.card {
+  background: #f0f0f0;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  max-width: 600px;
+
+  * {
+    display: block;
+    width: 100%;
+  }
+}

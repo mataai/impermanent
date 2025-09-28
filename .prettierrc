@@ -1,0 +1,8 @@
+{
+  "singleQuote": true,
+  "htmlWhitespaceSensitivity": "ignore",
+  "html.format.templating": [
+    "angular"
+  ],
+  "html.format.indentHandlebars": true
+}

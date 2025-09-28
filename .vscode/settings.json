@@ -1,0 +1,6 @@
+{
+  "html.format.templating": ["angular"],
+  "html.format.indentHandlebars": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFoldingRangeProvider": "Angular.ng-template"
+}
