@@ -1,4 +1,4 @@
-# Impermanents : Atelier de programmation du 28 septembre 2025
+# Impermanent : Atelier de programmation du 28 septembre 2025
 Projet web collaboratif explorant les thèmes de l’impermanence dans un contexte d’abondance numérique.
 
 ## Objectif
