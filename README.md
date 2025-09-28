@@ -111,9 +111,9 @@ Adaptez les champs nécessaires et posez vos questions si besoin.
 - Installer Krew dans votre terminal: suivre [les instructions d'installation de
 krew](https://krew.sigs.k8s.io/docs/user-guide/setup/install/)
 
-- **kubelogin**
+- **Kubelogin**
 
-`kubelogin` est utilisé pour s'authentifier au cluster sandbox pour cet atelier en utilisant le SSO avec OIDC.
+`kubelogin` est utilisé pour s'authentifier au cluster sandbox pour cet atelier.
 
 Pour installer `kubelogin`, exécuter la commande :
 
