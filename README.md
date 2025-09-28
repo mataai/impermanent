@@ -34,16 +34,16 @@ Libre à vous de procéder autrement si vous préférez !
 
   - Endpoints :
 
-    - POST /song : création d’une chanson + QR
+    - `POST /song` : création d’une chanson avec ses infos + QR
 
-    - GET /song/{qrCode} : récupération métadonnées + URL audio
+    - `GET /song/{qrCode}` : récupération des infos sur la chanson + URL audio
 
-    - *POST /song/{qrCode}/listen : enregistre la première écoute (optionnel, si vous souhaitez tracer les lectures côté serveur).*
+    - *`POST /song/{qrCode}/listen` : enregistre la première écoute (optionnel, si vous souhaitez tracer les lectures côté serveur).*
 
 - Frontend
 
   - Page qui s’ouvre au scan du QR code, affiche l’artiste, le message et le bouton « Écouter ».
-  - Page d'accuiel qui permet d'ajouter une chanson et de géhérer un code qr.
+  - Page d'accueil qui permet d'ajouter une chanson et d'afficher un QR code.
   - Vérifie dans localStorage/IndexedDB si l’utilisateur a déjà écouté la chanson sur ce navigateur.
 
 - Guides visuels
@@ -65,6 +65,28 @@ Libre à vous de procéder autrement si vous préférez !
   > Stockez l’URL du backend dans les variables d’environnement pour faciliter le déploiement. (fichier .env)
   
   > Pour le développement, utilisez des conteneurs Docker (PostgreSQL, etc.) pour vos bases de données.
+
+## Technologies suggérées (si vous n’avez pas de préférence)
+
+- Frontend : [React](https://create-react-app.dev/docs/getting-started/)
+
+- Backend : Node.js (API REST) avec [Express](https://expressjs.com/en/starter/installing.html)
+
+- Base de données : PostgreSQL
+
+Pour le développement, vous pouvez lancer une instance PostgreSQL temporaire avec Docker :
+
+```bash
+docker run --name impermanent-dev \
+  -e POSTGRES_USER=impermanent-dev \
+  -e POSTGRES_PASSWORD=test123 \
+  -e POSTGRES_DB=impermanent-dev \
+  -p 5432:5432 \
+  -v pgdata:/var/lib/postgresql/data \
+  -d postgres:16
+```
+
+Cela permet de démarrer rapidement une base de données locale sans l’installer directement sur votre machine.
 
 ## Documentation: DevOps
 
