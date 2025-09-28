@@ -21,10 +21,36 @@ Ce projet s’appuie sur les théories critiques des industries culturelles et s
 la théorie de la résonance du sociologue allemand Hartmut Rosa :
 <https://en.wikipedia.org/wiki/Resonance_(sociology)>
 
+## Horaire
+- 13 h 00 — Accueil & Mise en route (15 min)
+- 13 h 15 — Lecture guidée du README (10 min)
+- 13 h 25 — Formation des équipes (10 min)
+- 13 h 35 — Bloc de développement 1 (50 min)
+- 14 h 25 — Pause conviviale (20 min)
+- 14 h 45 — Bloc de développement 2 (2 h)
+- 16 h 45 — Déploiement collectif (1 h)
+- 17 h 45 — Clôture & Feedback (15 min)
+
 ## Tâches de l’atelier
-- Coder le **front-end** et le **back-end**
+- Coder le **front-end**
+- [ ] Frontend: Page de création de chanson (Cas utilisation #1)
+- [ ] Frontend: Page d'écoute de chanson (Cas utilisation #2)
+- [ ] Frontend: Gestion d'une seule écoute dans le navigateur
+- Coder le **back-end**
+- [ ] Backend: Connecté une base de données
+- [ ] Backend: POST /song endpoint
+	- [ ] Backend: enregistrer les infos d'une chanson dans la bd.
+ 	- [ ] Backend: enregistrer le fichier audio d'une chanson dans un dossier.
+  	- [ ] Backend: générer un code qr et sauvegarder dans la bd une référence au code qr.
+- [ ] Backend: GET /song/{qrCode}
+- [ ] Backend:  servire les fichiers audio
 - Déployer le tout sur notre infrastructure dans le cluster sandbox:
   (equipe)-impermanent.sandbox.cedille.club
+- [ ] CI: écrire un Dockerfile pour le frontend
+- [ ] CI: écrire un Dockerfile pour le backend
+- [ ] CI: écrire un pipeline (.github/workflows) pour build et push les images sur votre ghcr.
+- [ ] Déploiement: Modifier les fichiers k8s-templates
+- [ ] Déploiement: déployer manuellement avec `kubectl apply -k .`
 
 ## Documentation: Frontend & Backend
 
@@ -49,6 +75,8 @@ autrement si vous préférez !
     - *`POST /song/{qrCode}/listen` : enregistre la première écoute (optionnel,
       si vous souhaitez tracer les lectures côté serveur).*
 
+    - `GET /song/{qrCode}/listen` ou le frontend peut utilisé une URL de l'audio pour téléverser le fichier.
+
 - Frontend
 
   - Page qui s’ouvre au scan du QR code, affiche l’artiste, le message et le
@@ -65,11 +93,11 @@ autrement si vous préférez !
 
     ![MDD UML](docs/impermanent_uml_mdd.png)
 
-  - Cas utilisation: Un artiste ajoute une chanson pour créer un QR Code
+  - Cas utilisation #1: Un artiste ajoute une chanson pour créer un QR Code
 
     ![View the UML](docs/impermanent_dss-post-song.png)
 
-  - Cas utilisation: Une personne souhaite écouter une chanson en scannant un
+  - Cas utilisation #2: Une personne souhaite écouter une chanson en scannant un
     code qr.
 
     ![View the UML](docs/impermanent_dss-get-song.png)
@@ -82,7 +110,7 @@ autrement si vous préférez !
 
 ## Technologies suggérées (si vous n’avez pas de préférence)
 
-- Frontend : [React](https://create-react-app.dev/docs/getting-started/)
+- Frontend : Soit simple html/css/js ou en [React](https://create-react-app.dev/docs/getting-started/)
 
 - Backend : Node.js (API REST) avec
   [Express](https://expressjs.com/en/starter/installing.html)
