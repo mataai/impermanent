@@ -17,7 +17,7 @@ Ce projet s’appuie sur les théories critiques des industries culturelles et s
 
 ## Tâches de l’atelier
 - Coder le **front-end** et le **back-end**  
-- Déployer le tout sur notre infrastructure dans le cluster sandbox: <equipe>-impermanent.sandbox.cedille.club
+- Déployer le tout sur notre infrastructure dans le cluster sandbox: (equipe)-impermanent.sandbox.cedille.club
 
 ## Documentation: Frontend & Backend
 
