@@ -142,8 +142,7 @@ kubectl krew install oidc-login
 Pour d'autres options d'installation, voir [le repo de
 kubelogin](https://github.com/int128/kubelogin)
 
-- Récupérer le fichier de configuration envoyé par courriel si vous vous êtes
-  inscrit à l'atelier, sinon demander à Alex de vous l'envoyer.
+- Récupérer le fichier de configuration envoyé sur notre [Discord](https://discord.com/channels/773341080254152746/1421884995496317003).
 
 - Modifier dans le fichier k8s-sandbox-config.yaml les deux lignes où vous devez
   mettre votre courriel étudiant de l'ETS <your-email>.
@@ -268,7 +267,11 @@ Conditions:
 Events:                      <none>
 ```
 Finalement, il y a le namespace que l'on peut passer en paramètre à kubectl.
-Dans Kubernetes, les namespaces sont une ressource qui permettent d'isoler les applications et les accès. Lorsqu'aucun namespace n'est défini (comme dans les exemples précédents), toutes les commandes s'exécutent sur le namespace ``default``. On peut spécifier un namespace ainsi :
+Dans Kubernetes, les namespaces sont une ressource qui permettent d'isoler
+les applications et les accès.
+Lorsqu'aucun namespace n'est défini
+(comme dans les exemples précédents), toutes les commandes s'exécutent
+sur le namespace ``default``. On peut spécifier un namespace ainsi :
 
 ```bash
 kubectl get pods -n cedille
@@ -280,6 +283,55 @@ peut le créer ainsi :
 ```bash
 kubectl create namespace cedille
 
-## et pour l'effacer
+# et pour l'effacer
 kubectl delete namespace cedille
+# à noter qu'effacer un namespace efface aussi toutes les ressources contenues dans celui-ci
+```
+
+### Utilisation des templates k8s
+Des fichiers sont fournis dans le dossier k8s-template, contenant les ressources
+nécessaires au déploiemnt de vos applications.
+
+Comme mentionné plus haut, il faut remplacer les champs indiqués afin que les
+fichiers de configuration soient valides :
+  - Kustomization.yaml : namespace
+  - Frontend
+	- Deployment.yaml : image
+	- Service.yaml : port
+	- Ingress.yaml : host (x2)
+  - Backend:
+	- Deployment.yaml : image
+	- Service.yaml : port
+	- Ingress.yaml : host (x2)
+	- Secret.yaml : [variables pour postgres]
+
+Afin d'éviter les collisions lors des déploiements, assurez vous que le namespace spécifié est unique.
+
+Vous pouvez voir les namespaces créés avec la commande suivante :
+
+```bash
+kubectl get namespaces
+```
+
+Chaque fichier peut être appliqué manuellement en spécifiant le namespace avec la commande suivante :
+
+```bash
+kubectl apply -f <path-to-file.yaml> -n <namespace>
+```
+
+Il est aussi possible d'appliquer tous les fichiers en une seule commande à
+l'aide de Kustomize, qui est une ressource Kubernetes qui permet de joindre
+plusieurs fichiers ensemble et de les appliquer. Cette option cherche
+automatiquement les fichiers ```kustomization.yaml```, donc il nme faut que
+fournir un dossier contenant ce fichier:
+
+```bash
+# Dans le dossier k8s-templates/
+kubectl apply -k .
+```
+
+Vous pourrez ensuite voir ce qui a été créé ainsi :
+
+```bash
+kubectl get all -n <namespace>
 ```
