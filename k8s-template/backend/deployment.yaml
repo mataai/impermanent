@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: impermanent-backend
-        image: ghcr.io/mataai/impermanent_be:latest
+        image: ghcr.io/mataai/impermanent_api:latest
         resources:
           limits:
             memory: "128Mi"
