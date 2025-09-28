@@ -11,6 +11,9 @@ import fs from 'fs';
 import { CreateTrackDto, Track } from './models/track.dto';
 import multer from 'multer';
 import ffmpeg from 'fluent-ffmpeg';
+import { env } from 'process';
+
+const assetsLocation = env['ASSETS_DIR'] || __dirname + '../../../assets';
 
 const app = express();
 app.use(
@@ -21,26 +24,13 @@ app.use(
   }),
 );
 const upload = multer({
-  dest: path.join(__dirname, '..', '..', '..', 'assets', 'tmp'),
+  dest: path.join(assetsLocation, 'tmp'),
 });
 
-app.use(
-  '/assets',
-  express.static(path.join(__dirname, '..', '..', '..', 'assets')),
-);
+app.use('/assets', express.static(path.join(assetsLocation)));
 
 app.get('/stream/:id', (req, res) => {
-  return res.sendFile(
-    path.join(
-      __dirname,
-      '..',
-      '..',
-      '..',
-      'assets',
-      'songs',
-      `${req.params.id}`,
-    ),
-  );
+  return res.sendFile(path.join(assetsLocation, 'songs', `${req.params.id}`));
 });
 
 app.get('/api', (req, res) => {
@@ -49,15 +39,7 @@ app.get('/api', (req, res) => {
 
 app.get('/track/:id', (req, res) => {
   const songId = req.params.id;
-  const dbPath = path.join(
-    __dirname,
-    '..',
-    '..',
-    '..',
-    'assets',
-    'songs',
-    'db.json',
-  );
+  const dbPath = path.join(assetsLocation, 'songs', 'db.json');
   if (!fs.existsSync(dbPath)) {
     return res.status(404).send({ message: 'Track database not found' });
   }
@@ -80,7 +62,7 @@ app.post('/track', upload.single('audio'), (req, res) => {
     }
 
     // Convert to mp3 and save
-    const songsDir = path.join(__dirname, '..', '..', '..', 'assets', 'songs');
+    const songsDir = path.join(assetsLocation, 'songs');
     fs.mkdirSync(songsDir, { recursive: true });
     const outPath = path.join(songsDir, `${songId}.mp3`);
 
