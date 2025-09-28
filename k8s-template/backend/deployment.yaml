@@ -20,5 +20,12 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"
+        volumeMounts:
+        - name: impermanent-storage
+          mountPath: /media/
+      volumes:
+      - name: impermanent-storage
+        persistentVolumeClaim:
+          claimName: impermanent
         ports:
         - containerPort: <Port>

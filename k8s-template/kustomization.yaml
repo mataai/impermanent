@@ -1,8 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: <team-name>
-namePrefix: <team-name>
+namespace: <my-team>
 
 resources:
   - ./frontend
@@ -19,34 +18,24 @@ configMapGenerator:
 
 vars:
   - name: WEB_IMAGE
-    objref:
-      kind: ConfigMap
-      name: app-config
-      apiVersion: v1
+    objref: {kind: ConfigMap, name: app-config, apiVersion: v1 }
+    fieldref:
       fieldpath: data.WEB_IMAGE
   - name: API_IMAGE
-    objref:
-      kind: ConfigMap
-      name: app-config
-      apiVersion: v1
+    objref: {kind: ConfigMap, name: app-config, apiVersion: v1}
+    fieldref:
       fieldpath: data.API_IMAGE
   - name: WEB_PORT
-    objref:
-      kind: ConfigMap
-      name: app-config
-      apiVersion: v1
+    objref: {kind: ConfigMap, name: app-config, apiVersion: v1}
+    fieldref:
       fieldpath: data.WEB_PORT
   - name: API_PORT
-    objref:
-      kind: ConfigMap
-      name: app-config
-      apiVersion: v1
+    objref: {kind: ConfigMap, name: app-config, apiVersion: v1}
+    fieldref:
       fieldpath: data.API_PORT
   - name: TEAM
-    objref:
-      kind: ConfigMap
-      name: app-config
-      apiVersion: v1
+    objref: {kind: ConfigMap, name: app-config, apiVersion: v1}
+    fieldref:
       fieldpath: data.TEAM
 
 patches:
