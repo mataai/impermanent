@@ -7,18 +7,30 @@ Développer une application prototype pour un doctorant du nouveau département 
 ## Concept
 Un simple CMS qui génère un code QR donnant droit à **une seule écoute** d’une chanson, accompagnée de ses paroles et d’un message de l’artiste.
 
+Le QR code généré permet une seule écoute par dispositif. Une autre personne pourrait le scanner pour l’écouter (ça fait partie de l’intention, trouver des moments d’écoute individuel ou collectif signifiants).
+
 ## Contexte théorique
-Si vous souhaitez en savoir plus sur les théories qui sous-tendent ce projet (explorées dans le cadre de ma thèse), je serai ravi·e d’en discuter.  
+Si vous souhaitez en savoir plus sur les théories qui sous-tendent ce projet (explorées dans le cadre de ma thèse)...
 Elles s’appuient sur les théories critiques des industries culturelles et sur la théorie de la résonance du sociologue allemand Hartmut Rosa :  
 <https://en.wikipedia.org/wiki/Resonance_(sociology)>
 
 ## Tâches de l’atelier
 - Coder le **front-end** et le **back-end**  
-- Déployer le tout sur notre infrastructure : [impermanents.prodv2.cedille.club](https://impermanents.prodv2.cedille.club)
+- Déployer le tout sur notre infrastructure dans le cluster sandbox: impermanents-<equipe>.prodv2.cedille.club
 
-## Documentation
+## Documentation: Frontend
 
-### Déploiement (Kubernetes)
+Les informations qui suivent sont des guides. Si vous désirer faire autrement allez y!
+
+Les vues à faire sont montré dans un pdf : [View the PDF](https://github.com/ClubCedille/impermanent/blob/main/impermanent_views.pdf)
+
+Un petit MDD diagramme (en UML) qui illustre les composantes. [View the UML](https://github.com/ClubCedille/impermanent/blob/main/impermanent_uml_mdd.pdf)
+ 
+## Documentaiton: Backend
+
+
+
+## Documentation: Déploiement (Kubernetes)
 
 - Installer Krew dans votre terminal: suivre [les instructions d'installation de
 krew](https://krew.sigs.k8s.io/docs/user-guide/setup/install/)
