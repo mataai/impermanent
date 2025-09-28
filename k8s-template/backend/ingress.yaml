@@ -11,10 +11,10 @@ spec:
   ingressClassName: contour
   tls:
   - hosts:
-    - <team>-backend.impermanent.sandbox.cedille.club #replace me!
+    - matai-backend.impermanent.sandbox.cedille.club #replace me!
     secretName: secret
   rules:
-  - host: <team>-backend.impermanent.sandbox.cedille.club #replace me!
+  - host: matai-backend.impermanent.sandbox.cedille.club #replace me!
     http:
       paths:
       - path: /

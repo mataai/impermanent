@@ -12,11 +12,11 @@ import { Track } from '../track.dto';
     </div>
     <audio
       controls
-      [src]="'http://localhost:3000/stream/' + trackId + '.mp3'"
+      [src]="'https://matai-backend.impermanent.sandbox.cedille.club/stream/' + trackId + '.mp3'"
       style="display:none;"
     >
       <source
-        [src]="'http://localhost:3000/stream/' + trackId + '.mp3'"
+        [src]="'https://matai-backend.impermanent.sandbox.cedille.club/stream/' + trackId + '.mp3'"
         type="audio/mpeg"
       />
     </audio>
@@ -48,7 +48,7 @@ export class ListenPage implements OnInit {
   ngOnInit() {
     this.trackId = this._activatedRoute.snapshot.paramMap.get('id');
 
-    fetch(`http://localhost:3000/track/${this.trackId}`)
+    fetch(`https://matai-backend.impermanent.sandbox.cedille.club/track/${this.trackId}`)
       .then((response) => response.json())
       .then((data) => {
         console.log('Track info:', data);
@@ -61,7 +61,7 @@ export class ListenPage implements OnInit {
     // Optionally fetch track info here if needed
     this.audioElement = document.querySelector('audio') as HTMLAudioElement;
     if (this.audioElement) {
-      this.audioElement.src = `http://localhost:3000/stream/${this.trackId}`;
+      this.audioElement.src = `https://matai-backend.impermanent.sandbox.cedille.club/stream/${this.trackId}`;
       this.audioElement.load();
     }
   }

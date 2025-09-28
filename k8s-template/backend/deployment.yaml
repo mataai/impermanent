@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: impermanent-backend
-        image: <Image> #replace me !
+        image: ghcr.io/mataai/impermanent_be:latest
         resources:
           limits:
             memory: "128Mi"

@@ -161,7 +161,7 @@ export class UploadPage {
       if (value.file) {
         formData.append('audio', value.file);
       }
-      fetch('http://localhost:3000/track', {
+      fetch('https://matai-backend.impermanent.sandbox.cedille.club/track', {
         method: 'POST',
         body: formData,
       })

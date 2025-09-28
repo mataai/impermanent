@@ -11,7 +11,7 @@ spec:
   ingressClassName: contour
   tls:
   - hosts:
-    - <team>-impermanent.sandbox.cedille.club # replace me!
+    - matai-impermanent.sandbox.cedille.club # replace me!
     secretName: secret
   rules:
   - host: impermanent.sandbox.cedille.club

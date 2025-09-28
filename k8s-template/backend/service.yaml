@@ -9,5 +9,5 @@ spec:
   selector:
     app: impermanent-backend
   ports:
-  - port: <Port> #replace me (Port your app runs on)!
+  - port: 3000 #replace me (Port your app runs on)!
     targetPort: 80
