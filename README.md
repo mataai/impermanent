@@ -226,6 +226,11 @@ intéragir. Voici quelques types de ressources courantes :
 - **replica sets** : Assure un nombre spécifié de répliques de Pods en cours
   d'exécution.
 
+Exemple de déploiement : une requête vient de l’extérieur.
+Cette requête est captée par l’ingress selon son URL et acheminée vers le service.
+Le service la redirige ensuite vers le pod qui exécute l’application sur le port associé.
+![exemple de déploiement](docs/exemple-déploiement.png)
+
 On peut obtenir l'``id`` d'une ressource spécifique en affichant la liste de
 ressources de ce type, par exemple :
 
