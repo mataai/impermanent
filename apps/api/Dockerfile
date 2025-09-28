@@ -1,7 +1,7 @@
 # Use official Node.js LTS image
 FROM node:20-alpine
 
-ENV MEDIA_ROOT=/media
+ENV ASSETS_DIR=/media
 
 # Set working directory
 WORKDIR /app
